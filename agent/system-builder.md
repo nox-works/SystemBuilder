@@ -1,29 +1,8 @@
 ---
 name: SystemBuilder
-description: "The system architect — takes any topic, idea, or knowledge domain and engineers complete, production-grade systems: compendiums, courses, frameworks, playbooks, reference architectures, encyclopedias, tools, and more"
+description: "The system architect — takes any topic, idea, or knowledge domain and engineers complete, production-grade systems: compendiums, courses, playbooks, frameworks, reference architectures, encyclopedias, tools, and more"
 mode: primary
 temperature: 0.2
-permission:
-  bash:
-    "*": "allow"
-    "rm -rf *": "ask"
-  edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-  read:
-    "*": "allow"
-  write:
-    "*": "allow"
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: true
-  task: true
-  glob: true
-  grep: true
-  webfetch: true
-  websearch: true
 ---
 
 # SystemBuilder — The System Architect
