@@ -19,6 +19,11 @@ mkdir -p "$AGENT_TARGET" "$CONTEXT_TARGET/concepts" "$CONTEXT_TARGET/guides" "$C
 echo "[2/5] Installing agent..."
 cp "$SB_DIR/agent/system-builder.md" "$AGENT_TARGET/"
 
+echo "[2.5/5] Installing subagents..."
+mkdir -p "$OPENCODE_DIR/agent/subagents/knowledge"
+cp "$SB_DIR/agent/knowledge-synthesizer-subagent.md" "$OPENCODE_DIR/agent/subagents/knowledge/knowledge-synthesizer.md"
+cp "$SB_DIR/agent/system-builder-subagent.md" "$OPENCODE_DIR/agent/subagents/knowledge/system-builder.md"
+
 echo "[3/5] Installing command..."
 cp "$SB_DIR/command/system.md" "$COMMAND_TARGET/"
 

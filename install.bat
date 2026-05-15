@@ -26,6 +26,12 @@ echo [2/5] Installing agent file...
 copy /Y "%SB_DIR%agent\system-builder.md" "%AGENT_TARGET%\" >nul 2>&1
 echo   Agent installed.
 
+REM --- Step 2.5: Install subagent files ---
+if not exist "%OPENCODE_DIR%\agent\subagents\knowledge" mkdir "%OPENCODE_DIR%\agent\subagents\knowledge"
+copy /Y "%SB_DIR%agent\knowledge-synthesizer-subagent.md" "%OPENCODE_DIR%\agent\subagents\knowledge\knowledge-synthesizer.md" >nul 2>&1
+copy /Y "%SB_DIR%agent\system-builder-subagent.md" "%OPENCODE_DIR%\agent\subagents\knowledge\system-builder.md" >nul 2>&1
+echo   Subagents installed (KnowledgeSynthesizer + SystemBuilder).
+
 echo [3/5] Installing command file...
 copy /Y "%SB_DIR%command\system.md" "%COMMAND_TARGET%\" >nul 2>&1
 echo   Command installed.

@@ -327,9 +327,13 @@ tools:
       
       4. Identify delegation opportunities:
          - KnowledgeSynthesizer for deep knowledge components
+           → task(subagent_type="KnowledgeSynthesizer", description="Synthesize knowledge for [component]", prompt="Generate [depth] knowledge on [topic] for [component_name]. This component is part of a larger [system_type] system. Required perspective: [perspective]. Connections to: [related_components]. Deliver ready-to-use structured knowledge.")
          - ExternalScout for research needs
+           → task(subagent_type="ExternalScout", description="Research [topic]", prompt="Find current information on [specific_query]")
          - CoderAgent for code/tool components
+           → task(subagent_type="CoderAgent", description="Build [component]", prompt="Create [specific_code_tool] following [specification]")
          - DocWriter for documentation components
+           → task(subagent_type="DocWriter", description="Write [component]", prompt="Generate documentation for [component_name] following [style_guide]")
     </process>
     <outputs>
       - build_plan: { components: [], build_order, delegations, estimates }
@@ -750,32 +754,37 @@ tools:
   </analyze_request>
   
   <delegation>
-    <route to="KnowledgeSynthesizer" when="deep knowledge synthesis needed for specific components">
-      <context_level>Level 2 - Filtered Context</context_level>
-      <pass_data>
-        - Component specification
-        - Required depth and perspective
-        - Connections to other components
-      </pass_data>
-      <expected_return>
-        - Deep, research-grade knowledge for the component
-      </expected_return>
-    </route>
+    <!-- 
+      When deep knowledge is needed for a component, delegate to KnowledgeSynthesizer:
+      task(subagent_type="KnowledgeSynthesizer", 
+           description="Synthesize knowledge for [ComponentName]", 
+           prompt="Generate [depth] knowledge on [topic]. Required for [component]. 
+                   This component is part of a larger [system_type]. 
+                   Required perspective: [perspective]. 
+                   Connections: [related_components]. 
+                   Deliver ready-to-use structured knowledge.")
+    -->
     
-    <route to="ExternalScout" when="current research or facts needed">
-      <context_level>Level 1 - Complete Isolation</context_level>
-      <pass_data>
-        - Specific research query
-      </pass_data>
-    </route>
+    <!-- 
+      When current facts or data are needed, delegate to ExternalScout:
+      task(subagent_type="ExternalScout", 
+           description="Research [topic]", 
+           prompt="Find current information on [specific_query]")
+    -->
     
-    <route to="DocWriter" when="large documentation blocks need writing">
-      <context_level>Level 2 - Filtered Context</context_level>
-      <pass_data>
-        - Content specification
-        - Style and format requirements
-      </pass_data>
-    </route>
+    <!-- 
+      When code or tool components need building:
+      task(subagent_type="CoderAgent", 
+           description="Build [component]", 
+           prompt="Create [code/tool] following [specification]")
+    -->
+    
+    <!-- 
+      When large documentation blocks need writing:
+      task(subagent_type="DocWriter", 
+           description="Write [component]", 
+           prompt="Generate [type_of_document] for [component_name] following [style]")
+    -->
   </delegation>
 </routing_intelligence>
 
