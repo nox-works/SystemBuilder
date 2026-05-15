@@ -32,6 +32,11 @@ copy /Y "%SB_DIR%agent\knowledge-synthesizer-subagent.md" "%OPENCODE_DIR%\agent\
 copy /Y "%SB_DIR%agent\system-builder-subagent.md" "%OPENCODE_DIR%\agent\subagents\knowledge\system-builder.md" >nul 2>&1
 echo   Subagents installed (KnowledgeSynthesizer + SystemBuilder).
 
+REM --- Step 2.75: Install meta agent (for OpenCode discovery) ---
+if not exist "%OPENCODE_DIR%\agent\meta" mkdir "%OPENCODE_DIR%\agent\meta"
+copy /Y "%SB_DIR%agent\system-builder.md" "%OPENCODE_DIR%\agent\meta\system-builder.md" >nul 2>&1
+echo   Meta agent installed.
+
 echo [3/5] Installing command file...
 copy /Y "%SB_DIR%command\system.md" "%COMMAND_TARGET%\" >nul 2>&1
 echo   Command installed.
